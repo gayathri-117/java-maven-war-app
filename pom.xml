@@ -5,7 +5,7 @@
 	<artifactId>hello-world-war</artifactId>
 	<version>2.0.0-$(env.BUILD_NUMBER)</version>
 	<packaging>war</packaging>
-	<name>Hello World Web Application Repository</name>
+	<name>Hello World Web Application </name>
 	<description>Simplest possible Java Webapp</description>
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
