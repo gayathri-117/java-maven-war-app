@@ -3,22 +3,17 @@
   hosts: all
   become: true
   vars:
-    nexus_url: http://ec2-15-207-117-83.ap-south-1.compute.amazonaws.com:8081/repository
-    repository_type: java-maven-war-app-release
-    group_id: com%2Fmycompany%2Fapp
-    artifact_id: hello-world-war
-    version: 2.0.0
-    build_number: "{{build_number}}"
+    
   tasks:
   - name: Download file from a file path
     ansible.builtin.get_url:
-      url: "{{nexus_url}}/{{repository_type}}/{{group_id}}%2F{{artifact_id}}%2F{{version}}-{{build_number}}%2F{{artifact_id}}-{{version}}-{{ build_number}}.war"
+      url: "http://65.0.118.250:8081/repository/java-maven-war-app-release/com/mycompany/app/hello-world-war/2.0.1/hello-world-war-2.0.1.war"
       dest: /home/ec2-user
       username: admin
-      password: admin
+      password: bukber-govGe0-jigtax
 
   - name: Rename war file
-    ansible.builtin.shell: mv /home/ec2-user/{{group_id}}%2F{{artifact_id}}%2F{{version}}-{{build_number}}%2F{{artifact_id}}-{{version}}-{{ build_number}}.war /home/ec2-user/faangler.war
+    ansible.builtin.shell: mv /home/ec2-user/hello-world-war-2.0.1.war /home/ec2-user/faangler.war
 
   - name: Deploying artifact in webapps
     ansible.builtin.shell: cp /home/ec2-user/faangler.war /opt/apache-tomcat-9.0.90/webapps/faangler.war
