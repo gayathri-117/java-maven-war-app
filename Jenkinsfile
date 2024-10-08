@@ -1,6 +1,6 @@
 pipeline{
     agent{
-        label 'agent'
+        label any
     }
 
     tools {
@@ -10,7 +10,8 @@ pipeline{
     stages{
         stage('SCM Checkout'){
             steps{
-                checkout changelog: false, poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/theinterviewcompany/java-maven-war-app.git']])
+                checkout changelog: false, poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/gayathri-117/java-maven-war-app.git']])
+                
             }
 
         }
@@ -25,10 +26,11 @@ pipeline{
             steps{
                 withSonarQubeEnv("SonarQube") {
                     sh "${tool("Sonar_5.0.1")}/bin/sonar-scanner \
-                    -Dsonar.host.url=http://43.204.212.36:9000/ \
-                    -Dsonar.login=sqp_beebfd0692ea71e1aaf05aa3754caaf426e47762 \
-                    -Dsonar.java.binaries=target \
-                    -Dsonar.projectKey=java-maven-war-app"                    
+                    -Dsonar.host.url=http://13.233.193.182:9000/ \
+                    -Dsonar.login= sqp_a6da37b8db97ca9714e6cffe83bf21ba0ee1e936 \
+                    -Dsonar.java.binaries =target \
+                    -Dsonar.projectKey= java-maven-war-app"
+                
                 }
             }
         }
@@ -36,12 +38,6 @@ pipeline{
         stage('Nexus Upload'){
             steps{
                 sh 'mvn -s settings.xml clean deploy'
-            }
-        }
-
-        stage('deployment'){
-            steps{
-                sh 'ansible-playbook -i inventory deployment_playbook.yml -e "build_number=${BUILD_NUMBER}"'
             }
         }
 
