@@ -4,7 +4,7 @@
 
 </head>
 <body>
-	<h1>Hello World!</h1>
+	<h1>Hell Worl!</h1>
 	<h1>DevOps Training - Apr 2025 Batch</h1>
 	<h1>Pipeline script deployment</h1>
 	<h1>CI CD using pipeline job</h1>
